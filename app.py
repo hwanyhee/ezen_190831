@@ -37,7 +37,7 @@ def ai_calc():
     result =c.calc()
     print('app.py에서 출력한 덤셈결과:{}'.format(result))
 
-    return render_template('ai_calc.html',result = result)
+    return render_template('ai_calc.html',result = int(result))
 
 @app.route('/')
 def index():

@@ -3,6 +3,9 @@ from flask import render_template,request,jsonify
 import re
 from calculator.controller import  CalculatorController
 from cabbage.controller import  CabbageController
+from members.controller import  MemberController
+
+
 app = Flask(__name__)
 '''
 1.model.py :텐서플로우 모델 생성 코드 및 디렉토리에 모델 저장
@@ -58,6 +61,15 @@ def cabbage():
 
     return render_template('cabbage.html', result=int(result))
 
+
+@app.route('/login',methods=["POST"])
+def login():
+    # 웹에서 사용자 입력값 받기
+    userid=request.form['userid']
+    password = request.form['password']
+    # 컨트롤러 생성시 받은 값 전달후 모델이 예측한 값 받기
+    c = MemberController()
+    c.create_table()
 
 @app.route('/')
 def index():

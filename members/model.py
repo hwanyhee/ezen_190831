@@ -8,7 +8,7 @@ class MemberModel:
             CREATE TABLE IF NOT EXISTS MEMBER(
                 USERID VARCHAR(10) PRIMARY KEY,
                 PASSWORD VARCHAR(10),
-                PHONE VARCHAR(15)
+                PHONE VARCHAR(15),
                 REGDATE DATE DEFAULT CURRENT_TIMESTAMP
             
             )
@@ -28,7 +28,7 @@ class MemberModel:
             INSERT INTO MEMBER(USERID,PASSWORD,PHONE) VALUES(?,?,?)
         
         '''
-        self.conn.execute(stmt,data)
+        self.conn.executemany(stmt,data)
         self.conn.commit()
 
     def fetch_one(self):

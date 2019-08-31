@@ -20,7 +20,7 @@ class CabbageModel:
         #모델정의
         hypothesis = tf.matmul(X,W)+b #예측값
         cost = tf.reduce_mean(tf.square(hypothesis-Y))#예측값-실제값
-        optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.0000005)
+        optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.000000005)
         train = optimizer.minimize(cost)
         sess=tf.Session()
         sess.run(tf.global_variables_initializer())

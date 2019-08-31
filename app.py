@@ -2,8 +2,15 @@ from flask import Flask
 from flask import render_template,request,jsonify
 import re
 from calculator.controller import  CalculatorController
+from cabbage.controller import  CabbageController
 app = Flask(__name__)
+'''
+1.model.py :텐서플로우 모델 생성 코드 및 디렉토리에 모델 저장
+2. __init__.py:model.py실행해서 모델 생성
+3.controller.py :app에서 받은 데이타를 저장된 모델 불러와서 실행해서 예측
+4.app.js:화면에서 값을 받아서 controller생성후 값 전달
 
+'''
 @app.route('/ui_calc')
 def ui_calc():
     stmt = request.args.get('stmt','NONE')
@@ -37,6 +44,20 @@ def ai_calc():
     print('app.py에서 출력한 결과:{}'.format(result))
 
     return render_template('ai_calc.html',result = int(result))
+
+@app.route('/cabbage',methods=["POST"])
+def cabbage():
+    #웹에서 사용자 입력값 받기
+    avg_temp = request.form['avg_temp']
+    min_temp = request.form['min_temp']
+    max_temp = request.form['max_temp']
+    rain_fall = request.form['rain_fall']
+    #컨트롤러 생성시 받은 값 전달후 모델이 예측한 값 받기
+    c = CabbageController(avg_temp,min_temp,max_temp,rain_fall)
+    result=c.service()
+
+    return render_template('cabbage.html', result=int(result))
+
 
 @app.route('/')
 def index():

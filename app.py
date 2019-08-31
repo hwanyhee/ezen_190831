@@ -20,8 +20,7 @@ def ui_calc():
         if op =='+':result=n1+n2
         elif op == '-': result = n1 - n2
         elif op == '*': result = n1 * n2
-        elif op == '/':
-            result = n1 / n2
+        elif op == '/': result = n1 / n2
 
     return jsonify(result = result)
 
@@ -35,7 +34,7 @@ def ai_calc():
 
     c = CalculatorController(num1,num2,opcode)
     result =c.calc()
-    print('app.py에서 출력한 덤셈결과:{}'.format(result))
+    print('app.py에서 출력한 결과:{}'.format(result))
 
     return render_template('ai_calc.html',result = int(result))
 

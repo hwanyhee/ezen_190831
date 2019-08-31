@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template,request,jsonify
 import re
+from calculator.controller import  CalculatorController
 app = Flask(__name__)
 
 @app.route('/ui_calc')
@@ -23,10 +24,20 @@ def ui_calc():
             result = n1 / n2
 
     return jsonify(result = result)
-@app.route('/ai_calc')
-def ai_calc():
-    pass
 
+
+@app.route('/ai_calc',methods=["POST"])
+def ai_calc():
+
+    num1 = request.form['num1']
+    num2 = request.form['num2']
+    opcode=request.form['opcode']
+
+    c = CalculatorController(num1,num2,opcode)
+    result =c.calc()
+    print('app.py에서 출력한 덤셈결과:{}'.format(result))
+
+    return render_template('ai_calc.html',result = result)
 
 @app.route('/')
 def index():

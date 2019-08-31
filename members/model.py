@@ -47,7 +47,7 @@ class MemberModel:
 
     def login(self,userid,password):
         query ="""
-            "SELECT * FROM MEMBER WHERE USERID LIKE ? AND PASSWORD LIKE ?
+            SELECT * FROM MEMBER WHERE USERID LIKE ? AND PASSWORD LIKE ?
         
         """
         data = [userid,password]

@@ -69,8 +69,10 @@ def login():
     password = request.form['password']
     # 컨트롤러 생성시 받은 값 전달후 모델이 예측한 값 받기
     c = MemberController()
-    c.create_table()
+    #c.create_table()
 
+    view=c.login(userid,password)
+    return render_template(view)
 @app.route('/')
 def index():
     return render_template('index.html')
